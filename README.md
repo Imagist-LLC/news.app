@@ -1,2 +1,1 @@
-# imagist.app
-Imagist LLC
+# news.app
