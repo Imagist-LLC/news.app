@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - news.app</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+        
+        .nautilus {
+            font-size: 60px;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+        
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #999;
+            margin-bottom: 40px;
+        }
+        
+        .email-link {
+            display: inline-block;
+            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .email-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        @media (prefers-color-scheme: light) {
+            body {
+                background: #fff;
+                color: #000;
+            }
+            
+            p {
+                color: #666;
+            }
+            
+            .email-link {
+                background: rgba(0, 0, 0, 0.05);
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                color: #000;
+            }
+            
+            .email-link:hover {
+                background: rgba(0, 0, 0, 0.08);
+                border-color: rgba(0, 0, 0, 0.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nautilus">🐚</div>
+        
+        <h1>Support</h1>
+        
+        <p>Questions? Feedback? We're here to help.</p>
+        
+        <a href="mailto:help@news.app" class="email-link">
+            help@news.app
+        </a>
+    </div>
+</body>
+</html>
