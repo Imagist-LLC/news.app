@@ -3,62 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horizon - Weather App for VisionOS</title>
+    <title>news.app</title>
+    
+    <!-- Smart App Banner -->
+    <meta name="apple-itunes-app" content="app-id=6746968246, app-clip-bundle-id=app.news.News.Clip">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="news.app">
+    <meta property="og:description" content="Fake News. For Real.">
+    <meta property="og:type" content="website">
+    
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #f0f0f0;
-            color: #333;
+            background: #000;
+            color: #fff;
             text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
         }
         
         .container {
-            max-width: 650px;
+            max-width: 500px;
             margin: auto;
-            padding: 20px;
+            padding: 40px 20px;
         }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+        
+        .nautilus {
+            font-size: 80px;
+            margin-bottom: 40px;
+            filter: grayscale(100%);
+            opacity: 0.8;
+            animation: subtle-spin 60s linear infinite;
         }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
+        
+        @keyframes subtle-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
-
+        
         h1 {
-            color: #007BFF;
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fade-in 1s ease-out 0.5s forwards;
         }
-
-        @media (prefers-color-scheme: dark) {
+        
+        .tagline {
+            font-size: 18px;
+            font-weight: 300;
+            color: #666;
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: fade-in 1s ease-out 1s forwards;
+        }
+        
+        .hints {
+            font-size: 14px;
+            line-height: 2;
+            color: #444;
+            opacity: 0;
+            animation: fade-in 1s ease-out 1.5s forwards;
+        }
+        
+        .hint {
+            margin: 10px 0;
+            transition: color 0.3s ease;
+        }
+        
+        .hint:hover {
+            color: #666;
+        }
+        
+        @keyframes fade-in {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .cta {
+            margin-top: 60px;
+            opacity: 0;
+            animation: fade-in 1s ease-out 2s forwards;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        @media (prefers-color-scheme: light) {
             body {
-                background: #121212;
-                color: #fff;
+                background: #fff;
+                color: #000;
             }
-            .glass {
-                background: rgba(255, 255, 255, 0.05);
+            
+            .nautilus {
+                filter: none;
+                opacity: 0.6;
             }
+            
+            .tagline {
+                color: #999;
+            }
+            
+            .hints {
+                color: #ccc;
+            }
+            
+            .hint:hover {
+                color: #999;
+            }
+            
+            .download-btn {
+                background: rgba(0, 0, 0, 0.02);
+                border: 1px solid rgba(0, 0, 0, 0.08);
+                color: #000;
+            }
+            
+            .download-btn:hover {
+                background: rgba(0, 0, 0, 0.05);
+                border-color: rgba(0, 0, 0, 0.15);
+            }
+        }
+        
+        /* Subtle background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 80, 200, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(80, 120, 200, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(200, 80, 120, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="glass">
-            <h1>Horizon</h1>
-            <p>A breath-taking new spatial weather app for the Apple Vision Pro.</p>
-            <p>Get up to the minute forecasts and view weather conditions as if you were right there.</p>
+        <div class="nautilus">🐚</div>
+        
+        <h1>news.app</h1>
+        
+        <p class="tagline">Fake News. For Real.</p>
+        
+        <div class="hints">
+            <div class="hint">verified content to fight the fakes</div>
+            <div class="hint">truth in humor</div>
+            <div class="hint">media literacy</div>
+            <div class="hint">balanced media diet</div>
         </div>
-        <div class="glass">
-            <img src="helsinki.jpeg" alt="Horizon App Screenshot">
+        
+        <div class="cta">
+            <a href="https://apps.apple.com/app/id6746968246" class="download-btn">
+                Preorder on iPhone & iPad
+            </a>
         </div>
     </div>
 </body>
