@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility - News App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #007AFF;
+            --success-color: #34C759;
+            --background: #FFFFFF;
+            --surface: #F2F2F7;
+            --text-primary: #000000;
+            --text-secondary: #6E6E73;
+            --border-color: #E5E5EA;
+            --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background: #000000;
+                --surface: #1C1C1E;
+                --text-primary: #FFFFFF;
+                --text-secondary: #8E8E93;
+                --border-color: #38383A;
+                --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--surface) 0%, var(--background) 100%);
+        }
+
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-color);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 40px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--primary-color), #5856D6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 60px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #5856D6);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), #5856D6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 24px;
+        }
+
+        .feature-content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* AI Badge */
+        .ai-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        /* Additional Info */
+        .info-section {
+            padding: 80px 0;
+            background: var(--surface);
+            border-radius: 24px;
+            margin: 40px 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 48px;
+            margin-top: 40px;
+        }
+
+        .info-block h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-block p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #0051D5;
+            transform: translateY(-2px);
+        }
+
+        .button.secondary {
+            background: var(--background);
+            color: var(--primary-color);
+            border: 2px solid var(--border-color);
+        }
+
+        .button.secondary:hover {
+            background: var(--surface);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <span>📰</span>
+                <span>News App</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/accessibility" aria-current="page">Accessibility</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-icon">♿</div>
+                <h1>News for Everyone</h1>
+                <p>We believe everyone should have equal access to information. Our platform is built with comprehensive accessibility features, including cutting-edge AI technology.</p>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 style="text-align: center; font-size: 32px; margin-bottom: 16px;">Accessibility Features</h2>
+                <p style="text-align: center; color: var(--text-secondary); max-width: 600px; margin: 0 auto;">Our commitment to accessibility goes beyond compliance. We use modern technology to ensure everyone can stay informed.</p>
+
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">👁️</div>
+                            <div class="feature-content">
+                                <h3>Screen Reader Support</h3>
+                                <p>Full compatibility with VoiceOver, NVDA, JAWS, and other screen readers. Navigate articles using keyboard shortcuts and semantic landmarks.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">🔊</div>
+                            <div class="feature-content">
+                                <h3>Voice Control</h3>
+                                <p>Navigate and interact with our app using voice commands. Say "click" followed by any button or link text to activate it.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">🔤</div>
+                            <div class="feature-content">
+                                <h3>Dynamic Text Sizing</h3>
+                                <p>Increase text size up to 200% without losing functionality. All UI elements scale appropriately to maintain readability.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">🌙</div>
+                            <div class="feature-content">
+                                <h3>Dark Mode</h3>
+                                <p>Reduce eye strain with our carefully designed dark theme. Automatically adapts to your system preferences.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">🎨</div>
+                            <div class="feature-content">
+                                <h3>High Contrast Mode</h3>
+                                <p>Enhanced contrast between text and backgrounds. Color-blind friendly palettes ensure information isn't conveyed by color alone.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">🤖</div>
+                            <div class="feature-content">
+                                <h3>AI Image Descriptions</h3>
+                                <p>Machine learning automatically generates detailed alt text for news images, making visual content accessible to everyone.</p>
+                                <span class="ai-badge">✨ AI Powered</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">🎬</div>
+                            <div class="feature-content">
+                                <h3>Reduce Motion</h3>
+                                <p>Minimizes animations and auto-playing content for users sensitive to motion. Respects your system preferences.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">📝</div>
+                            <div class="feature-content">
+                                <h3>Closed Captions</h3>
+                                <p>All video content includes synchronized captions. Auto-generated transcripts available for audio content and podcasts.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-header">
+                            <div class="feature-icon">🎯</div>
+                            <div class="feature-content">
+                                <h3>Focus Mode</h3>
+                                <p>Remove distractions with our clean reader view. Strip away ads and unnecessary elements for focused reading.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="container">
+                <div class="info-grid">
+                    <div class="info-block">
+                        <h3><span>⚙️</span> Customize Your Experience</h3>
+                        <p>Access these features through your device's accessibility settings or our in-app preferences. We support all major assistive technologies.</p>
+                        <a href="/settings" class="button">Open Settings</a>
+                    </div>
+
+                    <div class="info-block">
+                        <h3><span>📚</span> Accessibility Guidelines</h3>
+                        <p>We follow WCAG 2.1 Level AA standards and continuously test with real users to improve our accessibility features.</p>
+                        <a href="/guidelines" class="button secondary">Learn More</a>
+                    </div>
+
+                    <div class="info-block">
+                        <h3><span>💬</span> Share Feedback</h3>
+                        <p>Help us improve accessibility. Report issues or suggest new features. Your input shapes our development roadmap.</p>
+                        <a href="/feedback" class="button secondary">Send Feedback</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 News App. Built for everyone.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add keyboard navigation enhancements
+        document.addEventListener('DOMContentLoaded', () => {
+            // Skip to main content link
+            const skipLink = document.createElement('a');
+            skipLink.href = '#main';
+            skipLink.className = 'skip-link';
+            skipLink.textContent = 'Skip to main content';
+            skipLink.style.cssText = `
+                position: absolute;
+                top: -40px;
+                left: 0;
+                background: var(--primary-color);
+                color: white;
+                padding: 8px;
+                text-decoration: none;
+                border-radius: 0 0 8px 0;
+            `;
+            skipLink.addEventListener('focus', () => {
+                skipLink.style.top = '0';
+            });
+            skipLink.addEventListener('blur', () => {
+                skipLink.style.top = '-40px';
+            });
+            document.body.insertBefore(skipLink, document.body.firstChild);
+
+            // Ensure main has id for skip link
+            const main = document.querySelector('main');
+            if (main) main.id = 'main';
+
+            // Add aria-labels to icon-only elements
+            document.querySelectorAll('.feature-icon').forEach(icon => {
+                icon.setAttribute('aria-hidden', 'true');
+            });
+
+            // Announce page load to screen readers
+            const announcement = document.createElement('div');
+            announcement.setAttribute('role', 'status');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.className = 'sr-only';
+            announcement.textContent = 'Accessibility page loaded';
+            document.body.appendChild(announcement);
+        });
+
+        // Respect prefers-reduced-motion
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        
+        if (!prefersReducedMotion.matches) {
+            // Add subtle animations only if motion is not reduced
+            document.querySelectorAll('.feature-card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        }
+    </script>
+</body>
+</html>
